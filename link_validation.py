@@ -35,4 +35,12 @@ for link in links:
         status = "ERROR"
 
     results.append([href, status])
-    
+    if status != 200:
+        print(f"BROKEN: {href} --> {status}")
+
+with open("results.csv", mode="w", newline="", encoding="utf-8") as file:
+    writer = csv.writer(file)
+    writer.writerow(["URL", "Status Code"])
+    writer.writerows(results)
+
+driver.quit()
